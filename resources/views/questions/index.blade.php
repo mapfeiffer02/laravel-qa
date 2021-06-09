@@ -11,7 +11,12 @@
                     @foreach ($questions as $question)
                         <div class="media">
                             <div class="media-body">
-                                <h3 class="mt-0">{{ $question->title }}</h3>
+                                <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
+                                <p class="lead">
+                                    Asked by
+                                    <a href="{{ $question->user->url}}">{{ $question->user->name }}</a>
+                                    <small class="test-muted">{{ $question->created_at }}</small>
+                                </p>
                                 {{ Str::limit($question->body, 250) }}
                             </div>
                         </div>
@@ -19,7 +24,6 @@
                     <div class="text-center">
                         {{ $questions->links() }}
                     </div>
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
