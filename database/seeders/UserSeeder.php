@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::factory(10)->create()->each(function($user) {
             $user->questions()
                 ->saveMany(
-                    Question::factory(rand(20, 30))
+                    Question::factory(rand(3, 5))
                     ->make()
                 );
         });
