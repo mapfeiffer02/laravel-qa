@@ -26,3 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('questions', QuestionController::class)->except('show');
 Route::get('/questions/{slug}', [QuestionController::class, 'show'])->name('questions.show');
 Route::post('/questions/{question}/answers', [AnswerController::class, 'store'])->name('answers.store');
+Route::get('/questions/{question}/{answer}', [AnswerController::class, 'edit'])->name('answers.edit');
+Route::put('/questions/{question}/{answer}', [AnswerController::class, 'update'])->name('answers.update');
+Route::delete('/questions/{question}/{answer}', [AnswerController::class, 'destroy'])->name('answers.destroy');
