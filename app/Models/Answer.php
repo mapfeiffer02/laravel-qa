@@ -28,4 +28,15 @@ class Answer extends Model
             $answer->question->save();
         });
     }
+    
+    public function getBodyHtmlAttribute()
+    {
+        return \Parsedown::instance()->text($this->body);
+    }
+
+    
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
 }
