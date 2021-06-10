@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Answer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,9 @@ class AnswerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'body' => $this->faker->paragraphs(rand(3, 7), true),
+            'user_id' => User::pluck('id')->random(),
+            'votes_count' => rand(0,5)
         ];
     }
 }
