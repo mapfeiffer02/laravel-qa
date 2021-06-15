@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AcceptAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::post('/questions/{question}/answers', [AnswerController::class, 'store'])
 Route::get('/questions/{question}/{answer}', [AnswerController::class, 'edit'])->name('answers.edit');
 Route::put('/questions/{question}/{answer}', [AnswerController::class, 'update'])->name('answers.update');
 Route::delete('/questions/{question}/{answer}', [AnswerController::class, 'destroy'])->name('answers.destroy');
+Route::post('/answers/{answer}/accept', AcceptAnswerController::class)->name('answers.accept');
