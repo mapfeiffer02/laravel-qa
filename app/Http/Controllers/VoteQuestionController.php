@@ -6,7 +6,7 @@ use App\models\Question;
 use App\Models\Votable;
 use Illuminate\Http\Request;
 
-class VotableController extends Controller
+class VoteQuestionController extends Controller
 {
     public function __construct()
     {

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\models\User;
+use App\Models\Answer;
 use App\models\Question;
+use Illuminate\Database\Seeder;
 
 
 class VotableSeeder extends Seeder
@@ -16,8 +17,6 @@ class VotableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('votables')->where('votable_type', 'App\Question')->delete();
-
         $users = User::all();
         $numberOfUsers = $users->count();
         $votes = [-1, 1];
@@ -25,7 +24,14 @@ class VotableSeeder extends Seeder
         foreach(Question::all() as $question){
             for ( $i = 0; $i < rand(1, $numberOfUsers); $i++){
                 $user = $users[$i];
-                $user->voteQUestion($question, $votes[rand(0, 1)]);
+                $user->voteQuestion($question, $votes[rand(0, 1)]);
+            }
+        }
+
+        foreach(Answer::all() as $answer){
+            for ( $i = 0; $i < rand(1, $numberOfUsers); $i++){
+                $user = $users[$i];
+                $user->voteAnswer($answer, $votes[rand(0, 1)]);
             }
         }
     }
