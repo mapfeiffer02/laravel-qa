@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\VotableController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AcceptAnswerController;
@@ -36,3 +37,6 @@ Route::post('/answers/{answer}/accept', AcceptAnswerController::class)->name('an
 
 Route::post('questions/{question}/favorites', [FavoritesController::class, 'store'])->name('questions.favorite');
 Route::delete('/questions/{question}/favorites', [FavoritesController::class, 'destroy'])->name('questions.unfavorite');
+
+
+Route::post('/questions/{question}/vote', VotableController::class);

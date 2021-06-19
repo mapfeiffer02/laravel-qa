@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -73,5 +74,32 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->belongsToMany(Question::class, 'favorites')->withTimestamps();
+    }
+
+    public function voteQuestions()
+    {
+        return $this->morphedByMany(Question::class, 'votable');
+    }
+
+    public function voteAnswers()
+    {
+        return $this->morphedByMany(Answer::class, 'votable');
+    }
+
+    public function voteQuestion(Question $question, $vote)
+    {
+        $voteQuestions = $this->voteQuestions();
+        if ($voteQuestions->where('votable_id', $question->id)->exists()){
+            $voteQuestions->updateExistingPivot($question, ['vote' => $vote]);
+        }
+        else {
+            $voteQuestions->attach($question, ['vote' => $vote]);
+        }
+
+        $question->load('votes');
+        $downvotes = (int) $question->downVotes()->sum('vote');
+        $upvotes = (int) $question->upVotes()->sum('vote');
+        $question->votes_count = $upvotes + $downvotes;
+        $question->save();
     }
 }

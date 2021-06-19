@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -56,5 +57,10 @@ class Answer extends Model
     public function getIsBestAnswerAttribute()
     {
         return $this->id === $this->question->best_answer_id;
+    }
+
+    public function votes()
+    {
+        return $this->morphToMany(User::class, 'votable');
     }
 }
