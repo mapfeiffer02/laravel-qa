@@ -3,7 +3,7 @@
         $name = 'question';
         $firstURISegment = 'questions';
     @endphp
-@elseif ($model instanceof App\Models\Question)
+@elseif ($model instanceof App\Models\Answer)
     @php
         $name = 'answer';
         $firstURISegment = 'answers';
