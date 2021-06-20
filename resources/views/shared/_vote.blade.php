@@ -13,7 +13,6 @@
     $formID = $name . "-" . $model->id;
     $formAction = "/{$firstURISegment}/{$model->id}/vote";
 @endphp
-/{{ $formID }}/vote
 <div class="d-flex flex-column vote-controls">
     <a title="This {{ $name }} is useful" class="vote-up {{ Auth::guest() ? 'off' : '' }}"
     onclick="event.preventDefault(); document.getElementById('up-vote-{{ $formID }}').submit();"
