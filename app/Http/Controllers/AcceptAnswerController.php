@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
 use Illuminate\Http\Request;
+use App\Answer;
 
 class AcceptAnswerController extends Controller
 {
@@ -12,6 +12,13 @@ class AcceptAnswerController extends Controller
         $this->authorize('accept', $answer);
 
         $answer->question->acceptBestAnswer($answer);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'message' => "You have accepted this answer as best answer"
+            ]);
+        }
+        
         return back();
     }
 }
